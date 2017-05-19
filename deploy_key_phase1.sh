@@ -28,6 +28,8 @@ EOF
 
 sed -i 's/^auto eth0$/#auto eth0/' /etc/network/interfaces
 
+echo "source /etc/network/interfaces.d/*" >> /etc/network/interfaces
+
 /bin/ip addr del $PHASE1_IP dev $VRACKIF
 /sbin/ifdown eth1
 /sbin/ifup eth1
