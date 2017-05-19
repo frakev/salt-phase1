@@ -36,7 +36,9 @@ nameserver 10.68.1.114
 nameserver 10.68.1.91
 EOF
 
-/sbin/umount /srv
+/bin/umount /srv
+
+sed -i 's/^\/dev\/vg\/lv.*$//' /etc/fstab
 
 /sbin/lvremove -f /dev/mapper/vg-lv
 /sbin/vgremove -f vg
