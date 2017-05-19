@@ -31,7 +31,7 @@ sed -i 's/^auto eth0$/#auto eth0/' /etc/network/interfaces
 echo "source /etc/network/interfaces.d/*" >> /etc/network/interfaces
 
 /bin/ip addr del $PHASE1_IP dev $VRACKIF
-/sbin/ifdown eth1
+/bin/ip link set dev $VRACKIF down
 /sbin/ifup eth1
 
 /bin/cat >/etc/resolv.conf<<EOF
