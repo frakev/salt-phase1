@@ -28,6 +28,10 @@ EOF
 
 sed -i 's/^auto eth0$/#auto eth0/' /etc/network/interfaces
 
+/bin/ip addr del $PHASE1_IP dev $VRACKIF
+/sbin/ifdown eth1
+/sbin/ifup eth1
+
 /bin/cat >/etc/resolv.conf<<EOF
 search rbx.twenga.lan twenga.lan
 options attempts:5 timeout:1 ndots:3
@@ -46,6 +50,8 @@ sed -i 's/^\/dev\/vg\/lv.*$//' /etc/fstab
 
 /usr/bin/apt update -q
 /usr/bin/apt install -q -y linux-image-4.9.0-0.bpo.2-amd64 linux-base=4.3~bpo8+1
+
+/bin/ping -q -c 1 -t 1 10.68.15.1 2>&1 > /dev/null ; if [[ $? == 0 ]]; then ifdown $VRACKIF ; fi
 
 echo "OK"
 
