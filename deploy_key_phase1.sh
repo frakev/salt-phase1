@@ -55,6 +55,9 @@ sed -i 's/^\/dev\/vg\/lv.*$//' /etc/fstab
 
 /bin/ping -q -c 1 -t 1 10.68.15.1 2>&1 > /dev/null ; if [[ $? == 0 ]]; then ifdown $VRACKIF ; fi
 
+/bin/ip route del default
+/bin/ip route add default via 10.68.15.1 dev $VRACKIF
+
 echo "OK"
 
 exit 0
