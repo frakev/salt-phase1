@@ -14,7 +14,7 @@ EOF
 
 /bin/ip route add 10.0.0.0/8 via 10.68.15.1 dev $VRACKIF
 
-MYIP=`/usr/bin/host $HOSTNAME $NS1 | awk '{print $4}'`
+MYIP=`/usr/bin/host $HOSTNAME $NS1 | awk '{print $4}'|tail -n 1`
 
 /bin/cat >/etc/network/interfaces.d/${VRACKIF}<<EOF
 auto ${VRACKIF}
@@ -43,7 +43,7 @@ EOF
 /sbin/pvremove -f /dev/md4
 
 /usr/bin/apt update -q
-/usr/bin/apt install -q -y linux-image-4.9.0-0.bpo.2-amd64
+/usr/bin/apt install -q -y linux-image-4.9.0-0.bpo.2-amd64 linux-base=4.3~bpo8+1
 
 echo "OK"
 
