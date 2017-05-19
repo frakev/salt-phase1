@@ -45,4 +45,6 @@ EOF
 /usr/bin/apt update -q
 /usr/bin/apt install -q -y linux-image-4.9.0-0.bpo.2-amd64
 
+echo "OK"
+
 exit 0
